@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdream.testpaper.mapper.StudyUserQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.cdream.testpaper.pojo.StudyUserQuestion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="wrong_times" property="wrongTimes" jdbcType="INTEGER" />
+    <result column="meet_times" property="meetTimes" jdbcType="INTEGER" />
+    <result column="pass_times" property="passTimes" jdbcType="INTEGER" />
+    <result column="sammary" property="sammary" jdbcType="VARCHAR" />
+    <result column="create_times" property="createTimes" jdbcType="TIMESTAMP" />
+    <result column="update_times" property="updateTimes" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, question_id, wrong_times, meet_times, pass_times, sammary, create_times, 
+    update_times
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cdream.testpaper.pojo.StudyUserQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from study_user_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_user_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_user_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cdream.testpaper.pojo.StudyUserQuestionExample" >
+    delete from study_user_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cdream.testpaper.pojo.StudyUserQuestion" >
+    insert into study_user_question (id, user_id, question_id, 
+      wrong_times, meet_times, pass_times, 
+      sammary, create_times, update_times
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, 
+      #{wrongTimes,jdbcType=INTEGER}, #{meetTimes,jdbcType=INTEGER}, #{passTimes,jdbcType=INTEGER}, 
+      #{sammary,jdbcType=VARCHAR}, #{createTimes,jdbcType=TIMESTAMP}, #{updateTimes,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdream.testpaper.pojo.StudyUserQuestion" >
+    insert into study_user_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="wrongTimes != null" >
+        wrong_times,
+      </if>
+      <if test="meetTimes != null" >
+        meet_times,
+      </if>
+      <if test="passTimes != null" >
+        pass_times,
+      </if>
+      <if test="sammary != null" >
+        sammary,
+      </if>
+      <if test="createTimes != null" >
+        create_times,
+      </if>
+      <if test="updateTimes != null" >
+        update_times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="wrongTimes != null" >
+        #{wrongTimes,jdbcType=INTEGER},
+      </if>
+      <if test="meetTimes != null" >
+        #{meetTimes,jdbcType=INTEGER},
+      </if>
+      <if test="passTimes != null" >
+        #{passTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sammary != null" >
+        #{sammary,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimes != null" >
+        #{createTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimes != null" >
+        #{updateTimes,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cdream.testpaper.pojo.StudyUserQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from study_user_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update study_user_question
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionId != null" >
+        question_id = #{record.questionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wrongTimes != null" >
+        wrong_times = #{record.wrongTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetTimes != null" >
+        meet_times = #{record.meetTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.passTimes != null" >
+        pass_times = #{record.passTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.sammary != null" >
+        sammary = #{record.sammary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTimes != null" >
+        create_times = #{record.createTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTimes != null" >
+        update_times = #{record.updateTimes,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update study_user_question
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      question_id = #{record.questionId,jdbcType=INTEGER},
+      wrong_times = #{record.wrongTimes,jdbcType=INTEGER},
+      meet_times = #{record.meetTimes,jdbcType=INTEGER},
+      pass_times = #{record.passTimes,jdbcType=INTEGER},
+      sammary = #{record.sammary,jdbcType=VARCHAR},
+      create_times = #{record.createTimes,jdbcType=TIMESTAMP},
+      update_times = #{record.updateTimes,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdream.testpaper.pojo.StudyUserQuestion" >
+    update study_user_question
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="wrongTimes != null" >
+        wrong_times = #{wrongTimes,jdbcType=INTEGER},
+      </if>
+      <if test="meetTimes != null" >
+        meet_times = #{meetTimes,jdbcType=INTEGER},
+      </if>
+      <if test="passTimes != null" >
+        pass_times = #{passTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sammary != null" >
+        sammary = #{sammary,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimes != null" >
+        create_times = #{createTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimes != null" >
+        update_times = #{updateTimes,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdream.testpaper.pojo.StudyUserQuestion" >
+    update study_user_question
+    set user_id = #{userId,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER},
+      wrong_times = #{wrongTimes,jdbcType=INTEGER},
+      meet_times = #{meetTimes,jdbcType=INTEGER},
+      pass_times = #{passTimes,jdbcType=INTEGER},
+      sammary = #{sammary,jdbcType=VARCHAR},
+      create_times = #{createTimes,jdbcType=TIMESTAMP},
+      update_times = #{updateTimes,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
